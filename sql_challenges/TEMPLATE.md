@@ -2,24 +2,31 @@
 ### `sql_challenges/challenge-01/README.md`
 
 ```md
-# SQL Challenge 01 – Index Usage
+# SQL Challenge - Analytic Functions: Databases for Developers
 
 ## Problem
-Given a table with 10M rows, improve query performance.
+https://datalemur.com/questions/sql-top-three-salaries
 
 ## Schema
 ```sql
-CREATE TABLE orders (
-  id BIGINT PRIMARY KEY,
-  customer_id BIGINT,
-  created_at TIMESTAMP,
-  status TEXT
-);
-
-── sql_challenges/
-│   ├── challenge-01/
-│   │   ├── README.md
-│   │   ├── solution.sql
-│   │   └── notes.md
-│   ├── challenge-02/
-│   │   └── README.md
+SELECT 
+    department_name, 
+    name, 
+    salary
+FROM (
+    SELECT 
+        d.department_name, 
+        e.name, 
+        e.salary,
+        DENSE_RANK() OVER (
+            PARTITION BY e.department_id 
+            ORDER BY e.salary DESC
+        ) as rank_num
+    FROM employee e
+    JOIN department d ON e.department_id = d.department_id
+) temp
+WHERE rank_num <= 3
+ORDER BY 
+    department_name ASC, 
+    salary DESC, 
+    name ASC;
