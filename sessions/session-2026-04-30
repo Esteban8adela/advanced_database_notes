@@ -1,0 +1,23 @@
+# Session – YYYY-MM-DD
+
+## Topics covered
+- Schema
+- Backups
+- DDL
+
+## What I understood
+- User has toget deleted after its done
+- All tables must be created without references and then create the refecrenced ones
+- Schemas are associated to a user
+
+## What is still confusing
+- 
+
+## Questions
+- 
+
+## Related concepts
+- [Concept name](../concepts/concept-name.md)
+
+## Resources used
+- See `resources/`
